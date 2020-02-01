@@ -3,7 +3,7 @@ import requests
 import threading
 from time import sleep
 
-proxies_path = "proxies_bg.txt"
+proxies_path = "proxies.txt"
 with open(proxies_path) as f:
     proxies_content = f.readlines()
 # you may also want to remove whitespace characters like `\n` at the end of each line
