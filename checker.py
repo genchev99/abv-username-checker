@@ -1,5 +1,7 @@
 import random
 import requests
+import threading
+from time import sleep
 
 proxies_path = "proxies_bg.txt"
 with open(proxies_path) as f:
@@ -46,8 +48,15 @@ if __name__ == '__main__':
     # you may also want to remove whitespace characters like `\n` at the end of each line
     usernames = [x.strip() for x in usernames_content]
 
+    threads = []
+
     for username in usernames:
-        check_username(username)
+        t = threading.Thread(target=check_username, args=(username,))
+        threads.append(t)
+        t.start()
+
+    for t in threads:
+        t.join()
 
     output_file.flush()
     output_file.close()
